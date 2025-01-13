@@ -1,5 +1,6 @@
-# idsap_ons
-International Data Science Accelerator Program
+## International Data Science Accelerator Program
+# Ghana Team
+
 
 
 <h2>Repository Structure</h2>
