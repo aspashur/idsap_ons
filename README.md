@@ -52,6 +52,7 @@ o	Engage stakeholders to ensure ethical application of findings.
 ### Policy and Planning:
 o	Offer actionable recommendations for urban planning, transportation, and health resource allocation.
 o	Support evidence-based decision-making at regional and national levels.
+
 ### Enhanced Organizational Capacity:
 o	Provide training on big data analytics to the Ghana Statistical Service.
 o	Serve as a proof-of-concept for using unconventional data sources for public welfare.
@@ -61,9 +62,11 @@ o	Collaborate with NGOs, private telecom operators, and academic institutions to
 ## Additional Ideas for Expansion:
 ### Disaster Recovery Simulations:
 o	Use CDR data to model population behavior during simulated disasters to improve emergency response strategies.
+
 ### Digital Inclusion:
 o	Analyze communication patterns to identify underserved regions with limited telecom activity, informing digital infrastructure investment.
+
 ### Sustainability Analysis:
 o	Study energy usage patterns indirectly by mapping communication activity to socioeconomic development trends.
-![image](https://github.com/user-attachments/assets/0b2e6649-13bd-4e64-b322-3726052a4568)
+
 
