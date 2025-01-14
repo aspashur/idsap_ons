@@ -11,16 +11,19 @@
 
 
 ## Concept
-Economic Insights and Market Analysis:
-o	Understanding economic activity and income distribution by analyzing communication patterns and correlating them with socioeconomic indicators.
+Agricultural Productivity:
+To use Call Detail Record (CDR) data in conjunction with other datasets to monitor and improve agricultural productivity at a granular level. This approach aims to identify mobility patterns in farming areas, rainfall patterns, resource access, and market connectivity, enabling targeted interventions to boost agricultural outputs and sustainability.
+Understanding economic activity and income distribution by analyzing communication patterns and correlating them with socioeconomic indicators.
 
 
 ## Data Points
-- Recharge level of subcribers
+- Identify workforce availability in farming areas using level of subscribers
+- Rainfall data (monthly)
 - Mobility to commercial areas
-- Availability of essential amenities
-- 
-- 
+- Availability of essential services 
+- Farmer-to-extension ratio
+- Access to credit
+- Arable land area
 
 
 ##Proposed Approach:
