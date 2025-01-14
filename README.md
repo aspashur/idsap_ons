@@ -26,7 +26,7 @@ Understanding economic activity and income distribution by analyzing communicati
 - Arable land area
 
 
-##Proposed Approach:
+## Proposed Approach:
 ###	Data Preparation:
 o	Acquire anonymized CDR datasets from Flowminder, Telecel/Vodafone Ghana.
 o	Conduct initial preprocessing, feature engineering (e.g., call volume, mobility patterns).
