@@ -24,6 +24,7 @@ Understanding economic activity and income distribution by analyzing communicati
 - Farmer-to-extension ratio
 - Access to credit
 - Arable land area
+- Agricultural yield data for comparison
 
 
 ## Proposed Approach:
