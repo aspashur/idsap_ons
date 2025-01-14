@@ -30,7 +30,7 @@ Understanding economic activity and income distribution by analyzing communicati
 ## Proposed Approach:
 ###	Data Preparation:
 o	Acquire anonymized CDR datasets from Flowminder, Telecel/Vodafone Ghana.
-o	Conduct initial preprocessing, feature engineering (e.g., call volume, mobility patterns).
+o	Conduct initial preprocessing, and feature engineering (e.g., call volume, mobility patterns).
 o	Timeframe : 
 o	
 ###	Exploratory Data Analysis (EDA):
@@ -46,15 +46,15 @@ o
 o	Interactive dashboards for stakeholders, showing insights like: 
 	High-density areas during peak hours.
 	Population flow between regions.
-	Regions with high mobility indicative of economic activity.
+	Regions with high mobility are indicative of economic activity.
 	
 ### Ethical and Privacy Considerations:
 o	Adhere to privacy standards through data anonymization and aggregated reporting.
-o	Engage stakeholders to ensure ethical application of findings.
+o	Engage stakeholders to ensure the ethical application of findings.
  
 ## Impact:
 ### Policy and Planning:
-o	Offer actionable recommendations for urban planning, transportation, and health resource allocation.
+o	Offer actionable agricultural planning, transportation, and agricultural resource allocation recommendations.
 o	Support evidence-based decision-making at regional and national levels.
 
 ### Enhanced Organizational Capacity:
