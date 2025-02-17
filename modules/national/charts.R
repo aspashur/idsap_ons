@@ -19,7 +19,7 @@ gh_trend <- pop_est %>%
   hc_plotOptions(line = list(marker = list(enabled = FALSE))) %>%
   hc_tooltip(shared = TRUE, crosshairs = TRUE)
 
-
+# make regional map
 reg_data <- pop_est %>%
   mutate(date = as.Date(date)) %>%
   filter(date == current_month) %>%
@@ -47,14 +47,43 @@ regional_map <- leaflet() %>%
     labelOptions = labelOptions(
       style = list("font-weight" = "bold", "color" = "black"),  # Improve readability
       textsize = "12px",
-      direction = "auto"
-    )
-  ) %>% 
-  setView(lng = -1.0232, lat = 8.0305, zoom = 6) %>%
+      direction = "auto")) %>% 
+  setView(lng = -1.0232, lat = 8.0305, zoom = 6.3) %>%
   addLegend(
     pal = pop_palette,
     values = reg_data$population,
     title = "Population",
     position = "bottomright"
   )
+
+# compare population projection and the current population
+pop_projected <- pop_projection %>% 
+  left_join(as.data.frame(reg_data) %>% select(region, population), 
+            by = c("Geographic_Area"="region"))
+
+pop_projected$population[1] <- gh_total
+pop_projected <- pop_projected %>% 
+  filter(!Geographic_Area == "Ghana") %>% 
+  mutate(projections = as.numeric(projections), 
+                        population = as.numeric(population),
+         id = row_number()) %>% 
+  mutate(id = id - 1,
+         dif = c(population - projections)/population *100) %>%
+  mutate(lit = ifelse(dif > 0, TRUE, FALSE)) 
+  # pivot_longer(c(projections, population), names_to = "type", values_to = "values")
+
+projected_diff <- pop_projected %>% 
+  ggplot(aes(reorder(Geographic_Area, dif), dif, fill = lit)) +
+  geom_col(width = .8, show.legend = FALSE) +
+  scale_fill_manual(values = c('TRUE' = "#27B288", "FALSE" = "#701F53")) +
+  labs(fill = NULL, y = "Percent", x = NULL, title = "Percent Difference Between Dynamic Population and Projections Population") +
+  theme_minimal() +
+  theme(axis.ticks = element_line(),
+        panel.grid.major.x = element_blank(),
+        axis.text.x = element_text(angle = 45))
+
+
+projected_diff <- ggplotly(projected_diff) %>% 
+  hide_legend()
+
 

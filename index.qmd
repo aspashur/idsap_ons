@@ -1,0 +1,145 @@
+---
+title: |
+  Rural-Urban Labour Migration - **Ghana**
+  
+  _GHANA STATISTICAL SERVICE_ 
+  
+  _FLOWMINDER.ORG_
+  
+  *2025 Report*
+author: 
+  - Sylvester Agyei-Boadi, Selasi Akaho & Preeti
+author-meta: "ONS Accelerator Program"
+format: 
+  html:
+    theme: quart
+    css: src/styles.css
+    page-layout: full
+    # toc: true
+    title-block-banner: true
+    title-block-style: default
+description: "Using aggregted CDR data from Telecel Ghana and Flowminder"
+
+execute: 
+  echo: false
+  message: false
+  warning: false
+---
+
+
+```{r}
+source("setup.R")
+```
+
+
+```{r import, warning=FALSE, message=FALSE}
+#| cache: true
+
+## import data
+pop_est = read.csv('../../pop_release/data/GHA_pop_estimates_2022_2024.csv')
+relocations = read.csv('../../pop_release/data/GHA_reloc_estimates_2020_2024.csv') %>% 
+  mutate(date = as.Date(date))
+
+pop_projection = read.csv('data/Population Projections_20250214-151840.csv')
+
+current_district = 'Achiase'
+current_month = as.Date("2024-12-01")
+pop_est %>% 
+  filter(district == current_district) %>% 
+  slice_head(n =1) %>% 
+  pull(region) -> current_region
+
+pop_est %>% 
+  filter(district == current_district) %>% 
+  slice_head(n = 1) %>% 
+  pull(dist_code) -> code
+
+geo_data = st_read('data/gss_phc2021_bnd_edgematched_20240821151831.gpkg',
+                   layer = "gss_phc2021_16_regions", quiet = TRUE) %>% 
+  st_make_valid() %>%  
+  select(!region) %>%
+  rename(region = region_name)
+
+```
+
+
+<!-- :::{.column-screen style="background-color: #f0f8ff; height: 600px; overflow-y: scroll;"} -->
+<!-- :::{.column-page} -->
+<!-- ::: grid -->
+<!-- :::{.g-col-5} -->
+:::{.column-screen style="background-color: #F2F2F2; height: 600px; overflow-y: scroll;"}
+:::{.column-page}
+::: grid 
+:::{.g-col-5 style="overflow-y: scroll;"}
+
+
+```{r defender, output = 'asis'}
+defender <- knitr::knit_child("./modules/national/text/introduction.qmd",
+                              quiet = TRUE)
+
+cat(defender, sep = "/n")
+
+source("modules/national/charts.R")
+
+```
+
+:::
+
+:::{.g-col-7 style="position: sticky; top: 0; height: 100vh; overflow-x: auto;"}
+## Summary Statistics 
+
+<div class="custom-grid">
+  <div class="custom-grid-item">
+    `r scales::comma(gh_total)`
+  Ghana's total dynamic population
+  </div>
+  <div class="custom-grid-item">
+    Monthly change
+  </div>
+  <div class="custom-grid-item">
+    Year-on-year change
+  </div>
+  <div class="custom-grid-item">
+    Difference from projection
+  </div>
+</div>
+ 
+<br>
+
+```{r gh_trend}
+#| fig-height: 3
+
+source("modules/national/charts.R")
+
+gh_trend
+```
+
+:::
+:::
+:::
+:::
+
+## Results
+### Regional Population and Comparism to Projections
+
+Greater Accra followed by Ashanti had the highest population of 6181206 and 5670095 respectively. Where as Greater Accra followed by Ashanti had the lowest population of 6181206 and 5670095 respectively.
+
+Upper West, Bono, Oti, Northern, Bono East, Western, Ashanti and North East lost population compared to regional projections.
+
+```{r}
+#| column: screen-inset-shaded
+#| layout-nrow: 1
+
+regional_map
+
+projected_diff
+```
+
+
+### Relocations Into Greater Accra
+
+
+
+
+
+
