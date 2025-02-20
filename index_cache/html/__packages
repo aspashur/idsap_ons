@@ -7,6 +7,7 @@ graphics
 stats
 ggplot2
 ggalt
+ggraph
 dplyr
 tidyr
 lubridate
@@ -17,3 +18,7 @@ leaflet
 leaflet.extras
 mapboxapi
 plotly
+purrr
+scales
+shiny
+htmltools

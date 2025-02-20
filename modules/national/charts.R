@@ -48,7 +48,7 @@ regional_map <- leaflet() %>%
       style = list("font-weight" = "bold", "color" = "black"),  # Improve readability
       textsize = "12px",
       direction = "auto")) %>% 
-  setView(lng = -1.0232, lat = 8.0305, zoom = 6.3) %>%
+  setView(lng = -1.0232, lat = 8.0305, zoom = 6) %>%
   addLegend(
     pal = pop_palette,
     values = reg_data$population,
@@ -86,4 +86,40 @@ projected_diff <- pop_projected %>%
 projected_diff <- ggplotly(projected_diff) %>% 
   hide_legend()
 
+# compute relocations
+regional_map <- relocations %>% 
+  filter(to_region == "Greater Accra", date == current_month,
+         !from_region == "Greater Accra") %>% 
+  group_by(from_region) %>% 
+  summarise(flow = sum(flow)) %>% 
+  left_join(reg_data %>% select(!population), by = c("from_region" = "region")) %>% 
+  # mutate(centroid = st_centroid(geom)) %>% 
+  st_as_sf()
+
+# Update color palette
+reg_palette <- colorNumeric(
+  palette = c("#B7EDE6", "#8A005E"), domain = regional_map$flow)
+
+# relocations to greater accra
+regional_map <- leaflet() %>%
+  addMapboxTiles(style_url = fm_basemap, access_token = fm_token,
+                 attribution = 'Flowminder / Mapbox', group = "Basemap") %>%
+  addPolygons(
+    data = regional_map,
+    color = "#CBA45A", weight = 1, fillColor = ~reg_palette(flow), 
+    fillOpacity = .8,
+    label = ~paste(from_region, ":", flow),  # Add region names as labels
+    labelOptions = labelOptions(
+      style = list("font-weight" = "bold", "color" = "black"),  # Improve readability
+      textsize = "12px",
+      direction = "auto"),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE)
+  ) %>% 
+  setView(lng = -1.0232, lat = 8.0305, zoom = 6) %>%
+  addLegend(
+    pal = reg_palette,
+    values = regional_map$flow,
+    title = "Population",
+    position = "bottomright"
+  )
 

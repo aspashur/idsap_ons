@@ -1,5 +1,6 @@
 library(ggplot2)
 library(ggalt)
+library(ggraph)
 library(dplyr)
 library(tidyr)
 library(lubridate)
@@ -10,6 +11,10 @@ library(leaflet)
 library(leaflet.extras)
 library(mapboxapi)
 library(plotly)
+library(purrr)
+library(scales)
+library(shiny)
+library(htmltools)
 
 
 # set constants
